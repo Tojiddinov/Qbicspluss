@@ -1,10 +1,11 @@
 import random
 from django.views import generic
-from django.shortcuts import reverse
+from django.shortcuts import reverse, render, redirect
 from django.core.mail import send_mail
 from leads.models import Agent
 from .mixins import OrganiserAndLoginRequiredMixin
 from .forms import AgentModelForm
+
 
 class AgentListView(OrganiserAndLoginRequiredMixin, generic.ListView):
     template_name = "agents/agents_lists.html"
@@ -19,7 +20,7 @@ class AgentCreateView(OrganiserAndLoginRequiredMixin, generic.CreateView):
 
     def get_success_url(self):
         return reverse("agents:agent-list")
-    
+
     def form_valid(self, form):
         user = form.save(commit=False)
         user.is_organisor = False
@@ -67,3 +68,15 @@ class AgentDeleteView(OrganiserAndLoginRequiredMixin, generic.DeleteView):
 
     def get_success_url(self):
         return reverse("agents:agent-list")
+
+
+def register(request):
+  if request.method == 'POST':
+    form = AgentModelForm(request.POST)
+    if form.is_valid():
+      form.save()
+      # Redirect to the agent list page
+      return redirect('agents:agent-list')
+  else:
+    form = AgentModelForm()
+  return render(request, 'agents/agents_create.html', {'form': form})

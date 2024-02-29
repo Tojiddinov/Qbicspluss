@@ -11,13 +11,13 @@
             <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">{{ lead.first_name }} {{ lead.last_name }}</h1>
             <div class="flex mb-4">
                 <a href="{% url 'leads:detallar' lead.pk %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
-                    Ma'lumotlar
+                    Informations
                 </a>
                 <a href="{% url 'leads:lead-category-update' lead.pk %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
-                    Fani
+                   WT
                 </a>
                 <a href="{% url 'leads:update' lead.pk %}" class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">
-                    O'zgartirish
+                    CHANGE
                 </a>
             </div>
             <form form method="post">
@@ -27,7 +27,7 @@
             </form>
             <div class="mt-5 py-5 border-t border-gray-200">
                 <a href="{% url 'leads:delete' lead.pk %}" class="w-1/2 mt-3 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                    O'chirish
+                    DELETE
                 </a>
             </div>
         </div>
