@@ -41,7 +41,7 @@ class AgentCreateView(OrganiserAndLoginRequiredMixin, generic.CreateView):
         send_mail(
             subject="Bu Agent yaratilingan",
             message="Yangi Agent yaratilgan",
-            from_email="susyswdg@gmail.com",
+            from_email="Email@gmail.com",
             recipient_list=[user.email],
         )
         return super(AgentCreateView, self).form_valid(form)
