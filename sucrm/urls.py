@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.views import (
     LoginView,
-    LogoutView, 
-    PasswordResetView, 
+    LogoutView,
+    PasswordResetView,
     PasswordResetDoneView,
     PasswordResetConfirmView,
     PasswordResetCompleteView)
@@ -21,5 +21,5 @@ urlpatterns = [
     path('password-reset-done/', PasswordResetDoneView.as_view(), name="password_reset_done"),
     path('password-reset-complate/', PasswordResetCompleteView.as_view(), name="password_reset_complete"),
     path('password-tiklash/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
-    path('logout/', LogoutView.as_view(), name="logout")
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

@@ -1,13 +1,20 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
+from django.utils.dateparse import parse_datetime
+
 
 class User(AbstractUser):
     is_organisor = models.BooleanField(default=True)
     is_agent = models.BooleanField(default=False)
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    status = models.CharField(max_length=120, null=True, blank=True)
+    sex = models.CharField(max_length=120, null=True, blank=True)
+    oboruduvania = models.CharField(max_length=120, null=True, blank=True)
+    uchastok = models.CharField(max_length=120, null=True, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -26,6 +33,7 @@ class Agent(models.Model):
     def __str__(self):
         return str(self.user)
 
+
 class Lead(models.Model):
     STATUS_CHOICES = (
         ('admin', 'Admin'),
@@ -39,7 +47,7 @@ class Lead(models.Model):
     organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     agent = models.ForeignKey(Agent, null=True, blank=True, on_delete=models.SET_NULL)
     category = models.ForeignKey(Category, related_name='leads', null=True, blank=True, on_delete=models.SET_NULL)
-    data = models.DateTimeField()
+    data = models.DateField()
     vremya = models.DateTimeField()
     status_obnardjil = models.CharField(max_length=20, choices=STATUS_CHOICES)
     sex = models.CharField(max_length=20)
@@ -49,9 +57,9 @@ class Lead(models.Model):
 
     def __str__(self):
         return self.familiyasi
-
-def post_user_yaratish_signal(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-
-post_save.connect(post_user_yaratish_signal, sender=User)
+#
+# def post_user_yaratish_signal(sender, instance, created, **kwargs):
+#     if created:
+#         UserProfile.objects.create(user=instance)
+#
+# post_save.connect(post_user_yaratish_signal, sender=User)

@@ -1,0 +1,13 @@
+/* Your static folder might look like this: your_app/static/your_app/styles.css */
+body{
+  background-color: #2f2323;
+}
+.status-admin {
+    background-color: red;
+}
+
+.status-master {
+    background-color: green;
+}
+
+/* Add more status classes as needed */

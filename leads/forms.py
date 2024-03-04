@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UsernameField
+from django.forms import DateTimeInput
+
 from .models import Lead, Agent
 
 User = get_user_model()
@@ -19,6 +21,17 @@ class LeadModelForm(forms.ModelForm):
             "oboruduvania",
             "uchastok",
         )
+        # widgets = {
+        #   'data': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
+        #   'vremya': forms.TimeInput(attrs={'type': 'time', 'format': '%H:%M'}),
+        # }
+
+    # widgets = {
+    #   'data': DateTimeInput(attrs={'type': 'date'}),
+    #   'vremya': DateTimeInput(attrs={'type': 'time'}),
+    #   'uchastok': forms.TextInput(attrs={'placeholder': 'undefined'}),
+    # }
+    #
 
 class LeadForm(forms.Form):
     ismi = forms.CharField(max_length=20)

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,16 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %}</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <body>
     {% include 'details/navbar.html' %}
     <div class="max-w-5xl mx-auto">
-        
+
         {% block content %}
 
         {% endblock %}
-     
+
     </div>
-    {% include 'details/footer.html' %} 
+    {% include 'details/footer.html' %}
 </body>
 </html>
